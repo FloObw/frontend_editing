@@ -100,6 +100,7 @@ class EditorController
      * Get configuration of external/additional plugins
      *
      * @return array
+     * @throws \Exception
      */
     protected function getExtraPlugins(): array
     {

@@ -80,8 +80,6 @@ class ContentEditableWrapperService
             throw new \InvalidArgumentException('Property "uid" can not to be empty!', 1486163287);
         }
 
-
-
         $content = sprintf(
             '<%s contenteditable="true" data-table="%s" data-field="%s" data-uid="%d" class="%s">%s</%s>',
             $this->contentEditableWrapperTagName,
@@ -383,6 +381,29 @@ class ContentEditableWrapperService
             $url .= '&returnUrl=' . PathUtility::getAbsoluteWebPath($closeUrl);
         }
         return $url;
+    }
+
+    /**
+     * Render a editor browse link url to the backend content wizard
+     *
+     * @param string $table
+     * @param string $uid
+     * @param string $uid
+     * @return string
+     */
+    public function renderEditorBrowseLinkUrl($table, $field, $uid): string
+    {
+        $browseLinkUrl = BackendUtility::getModuleUrl(
+            'rteckeditor_wizard_browse_links',
+            [
+                'P[table]' => $table,
+                'P[fieldName]' => $field,
+                'P[uid]' => $uid,
+                'P[pid]' => $GLOBALS['TSFE']->id,
+                'P[recordType]' => 'text'
+            ]
+        );
+        return (string)$browseLinkUrl;
     }
 
     /**
